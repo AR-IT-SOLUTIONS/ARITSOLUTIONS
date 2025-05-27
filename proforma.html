@@ -46,7 +46,7 @@
       text-align: left;
     }
     input[type="text"], input[type="number"] {
-      width: 100%;
+      width: 97%;
       border: none;
       background: transparent;
       font-size: 14px;
@@ -72,6 +72,15 @@
       text-align: right;
       font-weight: bold;
     }
+	.cliente-info {
+  margin-top: 20px;
+  border: 2px solid #007bff;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #eef6ff;
+}
+
+
   </style>
 </head>
 <body>
@@ -96,32 +105,32 @@
       <p><strong>Fecha:</strong> <span id="fecha-actual"></span></p>
     </div>
 
-    <!-- Datos del Cliente -->
-    <div class="section">
-      <h3>Datos del Cliente</h3>
-      <table>
-        <tr>
-          <td><strong>Nombre del Cliente:</strong></td>
-          <td><input type="text" placeholder="Ingrese el nombre completo" style="width: 100%;"></td>
-        </tr>
-        <tr>
-          <td><strong>Cédula / RUC:</strong></td>
-          <td><input type="text" placeholder="Ingrese la cédula o RUC" style="width: 100%;"></td>
-        </tr>
-        <tr>
-          <td><strong>Dirección:</strong></td>
-          <td><input type="text" placeholder="Ingrese la dirección" style="width: 100%;"></td>
-        </tr>
-        <tr>
-          <td><strong>Celular:</strong></td>
-          <td><input type="text" placeholder="Ingrese el número de celular" style="width: 100%;"></td>
-        </tr>
-        <tr>
-  <td><strong>Correo:</strong></td>
-  <td><input type="text" placeholder="Ingrese el correo electrónico" style="width: 100%;"></td>
-</tr>
-      </table>
-    </div>
+    <div class="cliente-info">
+  <h3>Datos del Cliente</h3>
+  <table>
+    <tr>
+      <td><strong>Nombre del Cliente:</strong></td>
+      <td><input type="text" placeholder="Ingrese nombre completo" style="border: 1px solid #000; padding: 5px; border-radius: 4px;"></td>
+    </tr>
+    <tr>
+      <td><strong>Cédula / RUC:</strong></td>
+      <td><input type="text" placeholder="Ingrese cédula o RUC" style="border: 1px solid #000; padding: 5px; border-radius: 4px;"></td>
+    </tr>
+    <tr>
+      <td><strong>Dirección:</strong></td>
+      <td><input type="text" placeholder="Ingrese dirección" style="border: 1px solid #000; padding: 5px; border-radius: 4px;"></td>
+    </tr>
+    <tr>
+      <td><strong>Celular:</strong></td>
+      <td><input type="text" placeholder="Ingrese número celular" style="border: 1px solid #000; padding: 5px; border-radius: 4px;"></td>
+    </tr>
+    <tr>
+      <td><strong>Correo:</strong></td>
+      <td><input type="text" placeholder="Ingrese el correo electrónico" style="border: 1px solid #000; padding: 5px; border-radius: 4px;"></td>
+    </tr>
+  </table>
+</div>
+
 
     <div class="section">
       <p><strong>Servicios:</strong><br>
@@ -133,6 +142,7 @@
       <table id="tabla-productos">
         <thead>
           <tr>
+            <th>Equipo/Dispositivo</th>
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio Unitario</th>
@@ -169,7 +179,7 @@
     document.getElementById("orden-numero").innerText = ordenFormateado;
     localStorage.setItem("ordenARIT", ordenFormateado);
 
-    // Función para calcular totales
+    // Calcular totales
     function calcularTotales() {
       let totalGeneral = 0;
       const filas = document.querySelectorAll("#cuerpo-tabla tr");
@@ -185,12 +195,13 @@
       document.getElementById("total-general").innerText = "$" + totalGeneral.toFixed(2);
     }
 
-    // Función para crear una fila nueva
+    // Agregar fila nueva
     function agregarFila() {
       const tbody = document.getElementById("cuerpo-tabla");
       const fila = document.createElement("tr");
 
       fila.innerHTML = `
+        <td><input type="text" class="equipo" placeholder="Ej: Laptop, Impresora"></td>
         <td><input type="text" class="descripcion" placeholder="Producto o servicio"></td>
         <td><input type="number" min="1" value="1" class="cantidad"></td>
         <td><input type="number" min="0" value="0" step="0.01" class="precio"></td>
@@ -208,7 +219,7 @@
       });
     }
 
-    // Verifica si la última fila tiene texto en la descripción
+    // Verificar última fila para agregar nueva
     function verificarUltimaFila() {
       const filas = document.querySelectorAll("#cuerpo-tabla tr");
       if (filas.length === 0) return agregarFila();
@@ -221,7 +232,7 @@
       }
     }
 
-    // Inicializa con una fila
+    // Iniciar con una fila
     agregarFila();
   </script>
 </body>
