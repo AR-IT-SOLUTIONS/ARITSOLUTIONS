@@ -44,6 +44,10 @@
     th, td {
       padding: 8px;
       text-align: left;
+      /* Add these properties for text justification and wrapping */
+      text-align: justify; /* Justify text */
+      word-wrap: break-word; /* Allow long words to break */
+      overflow-wrap: break-word; /* Ensure text wraps within the cell */
     }
     input[type="text"], input[type="number"] {
       width: 97%;
@@ -79,8 +83,6 @@
   border-radius: 10px;
   background-color: #eef6ff;
 }
-
-
   </style>
 </head>
 <body>
@@ -150,8 +152,7 @@
           </tr>
         </thead>
         <tbody id="cuerpo-tabla">
-          <!-- Fila inicial -->
-        </tbody>
+          </tbody>
       </table>
     </div>
 
@@ -200,13 +201,13 @@
       const tbody = document.getElementById("cuerpo-tabla");
       const fila = document.createElement("tr");
 
-      fila.innerHTML = 
+      fila.innerHTML = `
         <td><input type="text" class="equipo" placeholder="Ej: Laptop, Impresora"></td>
         <td><input type="text" class="descripcion" placeholder="Producto o servicio"></td>
         <td><input type="number" min="1" value="1" class="cantidad"></td>
         <td><input type="number" min="0" value="0" step="0.01" class="precio"></td>
         <td class="total-fila">$0.00</td>
-      ;
+      `;
 
       tbody.appendChild(fila);
 
