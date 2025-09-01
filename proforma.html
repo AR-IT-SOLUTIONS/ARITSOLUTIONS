@@ -5,86 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Proforma - AR PC SOLUCIONES</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f4faff;
-    color: #000;
-  }
-  .container {
-    border: 2px solid #000;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #ffffff;
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-  }
+  body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4faff; color: #000; }
+  .container { border: 2px solid #000; padding: 20px; border-radius: 10px; background-color: #ffffff; }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 10px; }
   .header img { width: 150px; }
   .empresa-info { text-align: right; }
   h1 { color: #007bff; }
   table { width: 100%; border-collapse: collapse; margin-top: 10px; }
   table, th, td { border: 1px solid #000; }
   th, td { padding: 8px; text-align: left; vertical-align: top; }
-  .cliente-info {
-    margin-top: 20px;
-    border: 2px solid #007bff;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #eef6ff;
-  }
+  .cliente-info { margin-top: 20px; border: 2px solid #007bff; padding: 15px; border-radius: 10px; background-color: #eef6ff; }
   .cliente-info div { margin-bottom: 6px; }
   .btn-eliminar, .btn-agregar, .btn-imprimir { cursor: pointer; }
-  .btn-eliminar {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-  }
+  .btn-eliminar { background-color: #dc3545; color: white; border: none; border-radius: 5px; padding: 5px 10px; }
   .btn-eliminar:hover { background-color: #a71d2a; }
-  .btn-agregar {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
+  .btn-agregar { background-color: #28a745; color: white; border: none; border-radius: 50%; width: 35px; height: 35px; font-size: 20px; font-weight: bold; margin-top: 10px; }
   .btn-agregar:hover { background-color: #1e7e34; }
-  .btn-imprimir {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-  }
+  .btn-imprimir { margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 8px; }
   .btn-imprimir:hover { background-color: #0056b3; }
 
-  /* Impresión horizontal y sin botones */
   @media print {
     @page { size: landscape; margin: 10mm; }
     .btn-imprimir, .btn-eliminar, .btn-agregar { display: none; }
   }
 
-  /* Estilo editable */
-  [contenteditable] {
-    padding: 2px 4px;
-    border-radius: 3px;
-    white-space: pre-wrap; /* RESPETA SALTOS DE LÍNEA Y ESPACIOS */
-  }
-  [contenteditable]:focus {
-    outline: 2px solid #007bff;
-    background-color: #eef6ff;
-  }
+  [contenteditable] { padding: 2px 4px; border-radius: 3px; white-space: pre-wrap; }
+  [contenteditable]:focus { outline: 2px solid #007bff; background-color: #eef6ff; }
 </style>
 </head>
 <body>
@@ -105,17 +51,17 @@
   </div>
 
   <h1>PROFORMA</h1>
-  <p><strong>N.º de Orden:</strong> <span contenteditable="true">0039</span></p>
-  <p><strong>Fecha:</strong> <span contenteditable="true">01/09/2025</span></p>
+  <p><strong>N.º de Orden:</strong> <span id="orden-numero"></span></p>
+  <p><strong>Fecha:</strong> <span contenteditable="true"></span></p>
 
   <!-- DATOS DEL CLIENTE -->
   <div class="cliente-info">
     <h3>Datos del Cliente</h3>
-    <div><strong>Nombre del Cliente:</strong> <span contenteditable="true">                        </span></div>
-    <div><strong>Cédula / RUC:</strong> <span contenteditable="true">                        </span></div>
-    <div><strong>Dirección:</strong> <span contenteditable="true">                           </span></div>
-    <div><strong>Celular:</strong> <span contenteditable="true">                        </span></div>
-    <div><strong>Correo:</strong> <span contenteditable="true">                        </span></div>
+    <div><strong>Nombre del Cliente:</strong> <span contenteditable="true"></span></div>
+    <div><strong>Cédula / RUC:</strong> <span contenteditable="true"></span></div>
+    <div><strong>Dirección:</strong> <span contenteditable="true"></span></div>
+    <div><strong>Celular:</strong> <span contenteditable="true"></span></div>
+    <div><strong>Correo:</strong> <span contenteditable="true"></span></div>
   </div>
 
   <p><strong>Servicios:</strong><br>
@@ -136,8 +82,7 @@
         <th>Eliminar</th>
       </tr>
     </thead>
-    <tbody id="cuerpo-tabla">
-    </tbody>
+    <tbody id="cuerpo-tabla"></tbody>
   </table>
   <button class="btn-agregar" onclick="agregarFila()">+</button>
 
@@ -167,7 +112,7 @@ function eliminarFila(boton) {
   calcularTotales();
 }
 
-function agregarFila(equipo="Laptop", descripcion="Servicio X", cantidad=1, precio=0.00) {
+function agregarFila(equipo="", descripcion="", cantidad=1, precio=0.00) {
   const tbody = document.getElementById("cuerpo-tabla");
   const fila = document.createElement("tr");
   fila.innerHTML = `
@@ -181,7 +126,6 @@ function agregarFila(equipo="Laptop", descripcion="Servicio X", cantidad=1, prec
   `;
   tbody.appendChild(fila);
 
-  // Recalcular totales cuando cambien cantidad o precio
   fila.querySelectorAll(".cantidad, .precio").forEach(td=>{
     td.addEventListener("input", calcularTotales);
     td.addEventListener("blur", calcularTotales);
@@ -190,13 +134,26 @@ function agregarFila(equipo="Laptop", descripcion="Servicio X", cantidad=1, prec
   calcularTotales();
 }
 
+// Generar número de orden automático
+function generarNumeroOrden() {
+  let orden = parseInt(localStorage.getItem("ordenARIT") || "0") + 1;
+  localStorage.setItem("ordenARIT", orden);
+  return orden.toString().padStart(4,"0");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  agregarFila("Laptop", "Reparación completa\nIncluye limpieza interna", 1, 200);
-  agregarFila("Impresora", "Cambio de toner\nVerificación de funcionamiento", 2, 50);
+  // Fecha actual
+  const fecha = new Date();
+  const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  document.querySelector("p span[contenteditable]").innerText = fecha.toLocaleDateString('es-EC', opcionesFecha);
+
+  // Número de orden automático
+  document.getElementById("orden-numero").innerText = generarNumeroOrden();
+
+  // Inicialmente una fila vacía
+  agregarFila();
 });
 </script>
 
 </body>
 </html>
-
-
