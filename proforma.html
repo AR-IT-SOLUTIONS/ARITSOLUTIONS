@@ -24,11 +24,15 @@
   .btn-imprimir { margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 8px; }
   .btn-imprimir:hover { background-color: #0056b3; }
 
-  @media print {
-    @page { size: landscape; margin: 10mm; }
-    .btn-imprimir, .btn-eliminar, .btn-agregar { display: none; }
+@media print {
+  /* ... otras reglas existentes ... */
+  .btn-imprimir, .btn-eliminar, .btn-agregar {
+    display: none;
   }
-
+  th:last-child, td:last-child {
+    display: none;
+  }
+}
   [contenteditable] { padding: 2px 4px; border-radius: 3px; white-space: pre-wrap; }
   [contenteditable]:focus { outline: 2px solid #007bff; background-color: #eef6ff; }
 </style>
@@ -123,6 +127,7 @@ function agregarFila(equipo="", descripcion="", cantidad=1, precio=0.00) {
     <td class="precio" contenteditable="true">${precio.toFixed(2)}</td>
     <td class="total-fila">$0.00</td>
     <td><button class="btn-eliminar" onclick="eliminarFila(this)">X</button></td>
+	
   `;
   tbody.appendChild(fila);
 
@@ -152,10 +157,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Inicialmente una fila vacía
   agregarFila();
+  
 });
+
+
 </script>
 
 </body>
-   <p><strong>GRACIAS POR TU COMPRA! Esperamos que vuelvas Pronto! 😄</strong><br>
+ <p><strong>AR PC SOLUCIONES AGRADECE MUCHO TU CONFIANZA! 😄</strong><br>
 </html>
-
